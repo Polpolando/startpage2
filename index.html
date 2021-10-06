@@ -5,109 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>New tab</title>
 </head>
-<body>
+<body onload="startTime()">
     <div class="center-screen">
         <form method="get" id="search" action="http://duckduckgo.com/">
-            <input type="text" name="q" maxlength="255"/>
+            <input type="textarea" name="q" maxlength="255" autocomplete="off" id="searchbar"/>
             <input type="submit" value="DuckDuckGo Search" style="display: none;" />
+            <script>
+			function startTime() {
+				const today = new Date();
+	 			let h = today.getHours();
+	  			let m = today.getMinutes();
+	  			let s = today.getSeconds();
+	  			m = checkTime(m);
+	  			s = checkTime(s);
+	  			document.getElementById('searchbar').placeholder =  h + "." + m + "." + s;
+	  			setTimeout(startTime, 1000);
+				}
+			function checkTime(i) {
+			  	if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			  	return i;
+			}
+            </script>
         </form>
         <div id="nav">
-            <div class="links">
-                asdf
+            <div class="links" id="social">
+                <p>consoom</p> 
                 <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
+                    <li><a href="https://www.youtube.com">Youtube</a></li>
+                    <li><a href="https://twitter.com/home">Twitter</a></li>
+                    <li><a href="https://www.facebook.com">Facebook</a></li>
                 </ul>
             </div>
-            <div class="links">
-                asdf
+            <div class="links" id="music">
+                <p>d-_-b</p>
                 <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
+                    <li><a href="https://www.last.fm/user/PolPolandino">Last.FM</a></li>
+                    <li><a href="https://bandcamp.com/polandino/feed">Bandcamp</a></li>
+                    <li><a href="https://soundcloud.com/discover">Soundcloud</a></li>
                 </ul>
             </div>
-            <div class="links">
-                asdf
+            <div class="links" id="chan">
+                <p>chan</p>
+                <div style="display:flex">
                 <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
+                    <li><a href="https://boards.4channel.org/g/">/g/</a></li>
+                    <li><a href="https://boards.4chan.org/wg/">/wg/</a></li>
+                    <li><a href="https://boards.4chan.org/w/">/w/</a></li>
+                    <li><a href="https://boards.4chan.org/c/">/c/</a></li>
                 </ul>
-            </div>
-            <div class="links">
-                asdf
                 <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
+                    <li><a href="https://boards.4chan.org/cm/">/cm/</a></li>
+                    <li><a href="https://boards.4chan.org/v/">/v/</a></li>
+                    <li><a href="https://boards.4chan.org/mu/">/mu/</a></li>
+                    <li><a href="https://boards.4chan.org/s4s">[s4s]</a></li>
                 </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
-            </div>
-            <div class="links">
-                asdf
-                <ul>
-                    <li>pierwszy</li>
-                    <li>pierwszy</li>
-                    <li>pierwszy</li>
-                    <li>pierwszy</li>
-                    <li>pierwszy</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                    <li>drugi</li>
-                    <li>trzeci</li>
-                </ul>
+                </div>
             </div>
         </div>
     </div>
-        <img src="./img.gif" alt="">
+        <!-- <img src="./img.gif" alt=""> -->
 </body>
 </html>

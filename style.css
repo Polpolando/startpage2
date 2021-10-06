@@ -1,14 +1,18 @@
 :root{
-    --fgColor:#ff000066;
+    --fgColor:#000000bb;
     --bgColor:#921014;
-    --textColor:#000;
+    --textColor:#990000;
+    --linkColor:#990000;
+    --linkHColor:#bb0000;
 }
 body{
     margin: 0;
     display: flex;
     justify-content: center;
-    background-color:var(--bgColor);
-    background: linear-gradient(to bottom, #800000 0%, #000000 140%);
+    background-image:url(./bg.png);
+    background-size:cover;
+    font-family:'JetBrains Mono';
+    
 }
 .center-screen {
     display: flex;
@@ -16,7 +20,7 @@ body{
     align-items: center;
     text-align: center;
     height: 100vh;
-    width: 80%;
+    width: 90%;
     margin: 0;
 }
 #nav{
@@ -25,14 +29,36 @@ body{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 8px;
 }
 .links{
     background-color:var(--fgColor);
     text-align: center;
     font-size: 32px;
+    color: var(--textColor);
+    min-width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 auto;
 }
-ul{
+.links p{
+    width: auto;
+    margin:8px 30px;
+}
+.links a{
+    color:var(--linkColor);
+    text-decoration: none;
+}
+.links a:hover{
+    color:var(--linkHColor)
+}
+.links li{
+    margin:2px 0px;
+}
+.links ul{
     margin:8px;
     font-size:24px;
     padding: 0;
@@ -40,13 +66,22 @@ ul{
 }
 form{
     width: 100%;
-    margin: 15vh;
+    margin: 6vh;
 }
 input{
-    width: 80%;
+    width: 100%;
     height: 64px;
     padding: 0;
     border:0;
+
+    background-color: var(--fgColor);
+    color:var(--linkHColor);
+
+    font-size: 36px;
+    text-align: center;
+}
+::placeholder{
+    color:var(--linkColor)
 }
 img{
     z-index: -1;
@@ -59,6 +94,7 @@ img{
     margin-top:auto;
     width: 878px;
 }
+
 @media only screen and (max-width: 1110px){
     img{
         display:none;
@@ -68,11 +104,18 @@ img{
     body{
         background-color: red;
     }
-    #nav{
-        margin-bottom: auto;
-    }
     .center-screen{
         height: 100vh;
+    }
+    #nav{
+        margin-bottom: auto;
+        font-size:32px
+    }
+    #social{
+        display:none;
+    }
+    #chan{
+        display:none;
     }
     form{
         margin:32px;
@@ -80,5 +123,8 @@ img{
     }
     input{
         width: 100%;
+    }
+    .links{
+        width: 50%;
     }
 }
