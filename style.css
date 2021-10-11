@@ -36,9 +36,10 @@ body{
 .links{
     background-color:var(--fgColor);
     text-align: center;
-    font-size: 32px;
+    font-size: 24px;
     color: var(--textColor);
-    min-width: 20%;
+    min-width: 15%;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,7 +61,7 @@ body{
 }
 .links ul{
     margin:8px;
-    font-size:24px;
+    font-size:18px;
     padding: 0;
     list-style-type: none;
 }
@@ -99,12 +100,9 @@ input{
         margin-bottom: auto;
         font-size:32px
     }
-    #social{
-        display:none;
-    }
-    #chan{
-        display:none;
-    }
+    #social{display:none;}
+    #chan{display:none;}
+    #typing{display:none;}
     form{
         margin:32px;
         margin-top:auto;
