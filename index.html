@@ -1,96 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>New tab</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>New tab</title>
+   <script>
+      // Could be moved to a separate file
+      linkBoxes =
+      {
+         "consoom": {
+            "Youtube": "https://www.youtube.com",
+            "Twitter": "https://twitter.com/home",
+            "Facebook": "https://www.facebook.com",
+            "Spacehey": "https://spacehey.com"
+         },
+         "d-_-b": {
+            "Last.FM": "https://www.last.fm/user/PolPolandino",
+            "Bandcamp": "https://bandcamp.com/polandino/feed",
+            "RYM": "https://rateyourmusic.com/new-music/",
+            "progarchives": "http://www.progarchives.com"
+         },
+         "chan": {
+            "cols": 2,
+            "/g/": "https://boards.4channel.org/g/",
+            "/mu/": "https://boards.4chan.org/mu/",
+            "/v/": "https://boards.4chan.org/v/",
+            "/c/": "https://boards.4chan.org/c/",
+            "/cm/": "https://boards.4chan.org/cm/",
+            "/wsg/": "https://boards.4chan.org/wsg/",
+            "/wg/": "https://boards.4chan.org/wg/",
+            "[s4s]": "https://boards.4chan.org/s4s"
+         },
+         "dev": {
+            "Github": "https://github.com",
+            "w3schools": "https://www.w3schools.com",
+            "polcarrd": "https://polpolando.github.io",
+            "jebany czat": "https://chatgpt.com",
+         },
+         "typing": {
+            "monkeytype": "https://monkeytype.com",
+            "typeracer": "https://play.typeracer.com",
+            "keyma.sh": "https://keyma.sh"
+         },
+         "warframe": {
+            "cols": 2,
+            "market": "https://warframe.market",
+            "wiki": "https://warframe.fandom.com/wiki/WARFRAME_Wiki",
+            "riven": "https://riven.market",
+            "drops": "https://drops.warframestat.us",
+            "builder": "https://overframe.gg",
+            "main site": "https://www.warframe.com",
+            "forums": "https://forums.warframe.com",
+         }
+      };
+
+      function createLinkBox(id, title, links, columns = 1) {
+         // Delete the cols so they don't appear as a link on the page
+         delete links["cols"];
+
+         let elementsPerColumn = Math.ceil(Object.keys(links).length / columns);
+
+         let box = document.createElement("div");
+         box.className = "links";
+         box.id = id;
+
+         // Box title
+         let p = document.createElement("p");
+         p.innerText = title;
+         box.appendChild(p);
+
+         // Container needed if we want more than 1 column
+         let div = document.createElement("div");
+         div.style.display = "flex";
+
+         // Create list and populate
+         let ul = document.createElement("ul");
+         let elementsInCurrentCol = 0;
+         for (let link in links) {
+
+            let a = document.createElement("a");
+            a.href = links[link];
+            a.innerText = link;
+
+            let li = document.createElement("li");
+            li.appendChild(a);
+            ul.appendChild(li);
+
+            // If we have enough elements in the column, create a new one
+            elementsInCurrentCol++;
+            if (elementsInCurrentCol >= elementsPerColumn) {
+               div.appendChild(ul);
+               ul = document.createElement("ul");
+               elementsInCurrentCol = 0;
+            }
+         }
+         // Add the last column if it's not full
+         if (elementsInCurrentCol > 0) {
+            div.appendChild(ul);
+         }
+         box.appendChild(div);
+         return box;
+      }
+      function createLinkBoxes() {
+         console.log("Creating link boxes")
+         let nav = document.getElementById("nav");
+         for (let box in linkBoxes) {
+            nav.appendChild(createLinkBox(box, box, linkBoxes[box], linkBoxes[box]["cols"]));
+         }
+      }
+   </script>
 </head>
-<body onload="startTime()">
-    <div class="center-screen">
-        <form method="get" id="search" action="http://duckduckgo.com/">
-            <input type="textarea" name="q" maxlength="255" autocomplete="off" id="searchbar"/>
-            <input type="submit" value="DuckDuckGo Search" style="display: none;" />
-            <script>
-			function startTime() {
-				const today = new Date();
-	 			let h = today.getHours();
-	  			let m = today.getMinutes();
-	  			let s = today.getSeconds();
-	  			m = checkTime(m);
-	  			s = checkTime(s);
-	  			document.getElementById('searchbar').placeholder =  h + "." + m + "." + s;
-	  			setTimeout(startTime, 1000);
-				}
-			function checkTime(i) {
-			  	if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-			  	return i;
-			}
-            </script>
-        </form>
-        <div id="nav">
-            <div class="links" id="social">
-                <p>consoom</p> 
-                <ul>
-                    <li><a href="https://www.youtube.com">Youtube</a></li>
-                    <li><a href="https://twitter.com/home">Twitter</a></li>
-                    <li><a href="https://www.facebook.com">Facebook</a></li>
-		    <li><a href="https://spacehey.com">Spacehey</a></li>
-                </ul>
-            </div>
-            <div class="links" id="music">
-                <p>d-_-b</p>
-                <ul>
-                    <li><a href="https://www.last.fm/user/PolPolandino">Last.FM</a></li>
-                    <li><a href="https://bandcamp.com/polandino/feed">Bandcamp</a></li>
-                    <li><a href="https://rateyourmusic.com/new-music/">RYM</a></li>
-		    <li><a href="http://www.progarchives.com">progarchives</a></li>
-                </ul>
-            </div>
-            <div class="links" id="chan">
-                <p>chan</p>
-                <div style="display:flex">
-                <ul>
-                    <li><a href="https://boards.4channel.org/g/">/g/</a></li>
-                    <li><a href="https://boards.4chan.org/wg/">/wg/</a></li>
-                    <li><a href="https://boards.4chan.org/w/">/w/</a></li>
-                    <li><a href="https://boards.4chan.org/c/">/c/</a></li>
-                </ul>
-                <ul>
-                    <li><a href="https://boards.4chan.org/cm/">/cm/</a></li>
-                    <li><a href="https://boards.4chan.org/wsg/">/wsg/</a></li>
-                    <li><a href="https://boards.4chan.org/mu/">/mu/</a></li>
-                    <li><a href="https://boards.4chan.org/s4s">[s4s]</a></li>
-                </ul>
-                </div>
-            </div>
-            <div class="links" id="dev">
-                <p>dev</p>
-                <ul>
-                    <li><a href="https://github.com">Github</a></li>
-                    <li><a href="https://www.w3schools.com">w3schools</a></li>
-                    <li><a href="https://polpolando.github.io">polcarrd</a></li>
-                </ul>
-            </div>
-	        <div class="links" id="interests">
-                <p>interests</p>
-                <ul>
-                    <li><a href="https://digdeeper.neocities.org">digdeeper</a></li>
-                    <li><a href="https://wiki.archlinux.org">arch wiki</a></li>
-                    <li><a href="https://psychonautwiki.org/wiki/Main_Page">psychonaut wiki</a></li>
-                </ul>
-            </div>
-            <div class="links" id="typing">
-                <p>typing</p>
-                <ul>
-                    <li><a href="https://monkeytype.com">monkeytype</a></li>
-                    <li><a href="https://play.typeracer.com">typeracer</a></li>
-                    <li><a href="https://keyma.sh">keyma.sh</a></li>
-                </ul>
-            </div>
-	
-    </div>
-        <!-- <img src="./img.gif" alt=""> -->
+
+<body onload="startTime(); createLinkBoxes()">
+   <div class="center-screen">
+      <form method="get" id="search" action="http://www.google.pl/search">
+         <input type="textarea" name="q" maxlength="255" autocomplete="off" id="searchbar" />
+         <input type="hidden" name="category_general" value="on">
+         <input type="submit" style="display: none;" />
+         <script>
+            function startTime() {
+               const today = new Date();
+               let h = today.getHours();
+               let m = today.getMinutes();
+               let s = today.getSeconds();
+               m = checkTime(m);
+               s = checkTime(s);
+               document.getElementById('searchbar').placeholder = h + "." + m + "." + s;
+               setTimeout(startTime, 1000);
+            }
+            function checkTime(i) {
+               if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+               return i;
+            }
+         </script>
+      </form>
+      <div id="nav">
+         <!--<div class="links" id="social">-->
+         <!--<p>consoom</p> -->
+         <!--<ul>-->
+         <!--<li><a href="https://www.youtube.com">Youtube</a></li>-->
+         <!--<li><a href="https://twitter.com/home">Twitter</a></li>-->
+         <!--<li><a href="https://www.facebook.com">Facebook</a></li>-->
+         <!--<li><a href="https://spacehey.com">Spacehey</a></li>-->
+         <!--</ul>-->
+         <!--</div>-->
+         <!--<div class="links" id="music">-->
+         <!--<p>d-_-b</p>-->
+         <!--<ul>-->
+         <!--<li><a href="https://www.last.fm/user/PolPolandino">Last.FM</a></li>-->
+         <!--<li><a href="https://bandcamp.com/polandino/feed">Bandcamp</a></li>-->
+         <!--<li><a href="https://rateyourmusic.com/new-music/">RYM</a></li>-->
+         <!--<li><a href="http://www.progarchives.com">progarchives</a></li>-->
+         <!--</ul>-->
+         <!--</div>-->
+         <!--<div class="links" id="chan">-->
+         <!--<p>chan</p>-->
+         <!--<div style="display:flex">-->
+         <!--<ul>-->
+         <!--<li><a href="https://boards.4channel.org/g/">/g/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/mu/">/mu/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/v/">/v/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/c/">/c/</a></li>-->
+         <!--</ul>-->
+         <!--<ul>-->
+         <!--<li><a href="https://boards.4chan.org/cm/">/cm/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/wsg/">/wsg/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/wg/">/wg/</a></li>-->
+         <!--<li><a href="https://boards.4chan.org/s4s">[s4s]</a></li>-->
+         <!--</ul>-->
+         <!--</div>-->
+         <!--</div>-->
+         <!--<div class="links" id="dev">-->
+         <!--<p>dev</p>-->
+         <!--<ul>-->
+         <!--<li><a href="https://github.com">Github</a></li>-->
+         <!--<li><a href="https://www.w3schools.com">w3schools</a></li>-->
+         <!--<li><a href="https://polpolando.github.io">polcarrd</a></li>-->
+         <!--</ul>-->
+         <!--</div>-->
+         <!--<div class="links" id="interests">-->
+         <!--<p>interests</p>-->
+         <!--<ul>-->
+         <!--<li><a href="https://digdeeper.neocities.org">digdeeper</a></li>-->
+         <!--<li><a href="https://wiki.archlinux.org">arch wiki</a></li>-->
+         <!--<li><a href="https://psychonautwiki.org/wiki/Main_Page">psychonaut wiki</a></li>-->
+         <!--</ul>-->
+         <!--</div>-->
+         <!--<div class="links" id="typing">-->
+         <!--<p>typing</p>-->
+         <!--<ul>-->
+         <!--<li><a href="https://monkeytype.com">monkeytype</a></li>-->
+         <!--<li><a href="https://play.typeracer.com">typeracer</a></li>-->
+         <!--<li><a href="https://keyma.sh">keyma.sh</a></li>-->
+         <!--</ul>-->
+      </div>
+   </div>
 </body>
+
 </html>
